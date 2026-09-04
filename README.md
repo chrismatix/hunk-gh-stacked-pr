@@ -71,3 +71,5 @@ bun test
 ```
 
 Test live from any PR branch: `hunkpr` after adding the checkout to `[extensions] paths` in `~/.config/hunk/config.toml`, or `hunk diff <merge-base> --extension /path/to/hunk-gh-stacked-pr`.
+
+This repo loads itself as a repo-local extension via `.hunk/extensions/hunk-gh-stacked-pr.ts` (trust prompt on first run). JSX transpiles to a `react/jsx-dev-runtime` import hunk doesn't map, so every checkout that loads it needs `node_modules` — run `bun install` or symlink it into worktrees.
