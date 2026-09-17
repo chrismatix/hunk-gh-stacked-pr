@@ -274,10 +274,11 @@ export function chainStack(current: { number: number; headRefName: string; baseR
     isCurrent,
   });
 
+  const MAX_STACK_DEPTH = 50;
   const ancestors: StackEntry[] = [];
   const seen = new Set([current.headRefName]);
   let baseRef = current.baseRefName;
-  while (byHead.has(baseRef) && !seen.has(baseRef)) {
+  while (byHead.has(baseRef) && !seen.has(baseRef) && ancestors.length < MAX_STACK_DEPTH) {
     const parent = byHead.get(baseRef)!;
     seen.add(parent.headRefName);
     ancestors.unshift(toEntry(parent, false));
@@ -286,7 +287,7 @@ export function chainStack(current: { number: number; headRefName: string; baseR
 
   const descendants: StackEntry[] = [];
   let headRef = current.headRefName;
-  while (byBase.has(headRef) && !seen.has(byBase.get(headRef)!.headRefName)) {
+  while (byBase.has(headRef) && !seen.has(byBase.get(headRef)!.headRefName) && descendants.length < MAX_STACK_DEPTH) {
     const child = byBase.get(headRef)!;
     seen.add(child.headRefName);
     descendants.push(toEntry(child, false));
