@@ -96,3 +96,10 @@ export function activeThread(state: PrState): ReviewThread | null {
 export function resetForPr(): void {
   setState({ tab: "overview", stackIndex: 0, checkIndex: 0, threadIndex: 0, logPeek: null });
 }
+
+export type TimelineFilter = "all" | "comments" | "reviews";
+
+export function cycleTimelineFilter(current: TimelineFilter): TimelineFilter {
+  const order: TimelineFilter[] = ["all", "comments", "reviews"];
+  return order[(order.indexOf(current) + 1) % order.length];
+}
