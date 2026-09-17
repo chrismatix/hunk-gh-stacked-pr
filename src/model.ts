@@ -442,3 +442,10 @@ export function formatCheckState(state: string | null): string {
     default: return "·";
   }
 }
+
+export function formatCheckDuration(startedAt: string | null, completedAt: string | null): string {
+  if (!startedAt || !completedAt) return "";
+  const seconds = Math.round((Date.parse(completedAt) - Date.parse(startedAt)) / 1000);
+  if (!Number.isFinite(seconds) || seconds < 0) return "";
+  return seconds >= 60 ? `${Math.floor(seconds / 60)}m${seconds % 60}s` : `${seconds}s`;
+}

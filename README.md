@@ -45,7 +45,7 @@ In the pane's mode:
 | `R` | refresh PR state |
 | `q` / `esc` | leave the mode |
 
-Checks auto-refresh every 30s while any check is pending. Lines with unresolved threads are tinted in the diff. Switching stacks refuses a dirty worktree (offers a stash), delegates to `gh stack checkout` when tracked, and retargets the live session via `hunk session reload`.
+Checks auto-refresh every 30s while any check is pending (see `poll_seconds`). Lines with unresolved threads are tinted in the diff. Switching stacks refuses a dirty worktree (offers a stash), delegates to `gh stack checkout` when tracked, and retargets the live session via `hunk session reload`.
 
 ## Config
 
