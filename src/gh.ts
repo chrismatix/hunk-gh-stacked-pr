@@ -70,7 +70,10 @@ export async function resolveRepo(cwd: string): Promise<string | null> {
 }
 
 export async function resolveBranchPr(cwd: string, repo: string): Promise<number | null> {
-  const result = await run("gh", ["pr", "view", "--json", "number", "--jq", ".number", "-R", repo], { cwd });
+  // `gh pr view -R` refuses to infer the PR from the checked-out branch, so name it.
+  const branch = (await run("git", ["branch", "--show-current"], { cwd })).stdout.trim();
+  if (!branch) return null;
+  const result = await run("gh", ["pr", "view", branch, "--json", "number", "--jq", ".number", "-R", repo], { cwd });
   if (result.code !== 0) return null;
   const number = parseInt(result.stdout.trim(), 10);
   return Number.isFinite(number) ? number : null;
