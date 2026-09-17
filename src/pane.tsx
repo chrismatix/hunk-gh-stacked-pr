@@ -302,7 +302,7 @@ export function PrPane({ width, theme }: ExtensionPaneProps): ReactNode {
         {header}
         <TabBar tab={state.tab} theme={theme} />
         {state.modeActive ? (
-          <Line content=" tab cycles · j/k move · s submit · m/M merge · e edit · C comment · R refresh" fg={theme.accentMuted} bg={theme.panel} />
+          <Line content=" tab cycles · j/k move · f filter timeline · s submit · m/M merge · R refresh" fg={theme.accentMuted} bg={theme.panel} />
         ) : null}
         {body}
       </box>
